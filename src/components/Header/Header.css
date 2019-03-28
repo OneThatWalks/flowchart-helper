@@ -1,0 +1,18 @@
+div.project-title > span:first-child {
+    color: var(--fc-light-gray);
+    font-size: 80px;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    line-height: 1;
+    text-transform: uppercase;
+    white-space: nowrap;
+    transform: translateX(0);
+    transition: 1s;
+}
+
+div.project-title:hover > span:first-child {
+    transform: translateX(calc(0vw - 100%));
+}
+
+/*TODO: Easing*/

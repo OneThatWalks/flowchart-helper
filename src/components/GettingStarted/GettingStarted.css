@@ -1,0 +1,26 @@
+.getting-started-box {
+    border-bottom-width: .2rem;
+    border-bottom-style: solid;
+    border-bottom-color: var(--fc-light-gray);
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    padding-bottom: 10px;
+    border-top-width: .2rem;
+    border-top-style: solid;
+    border-top-color: var(--fc-light-gray);
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    padding-top: 10px;
+    border-left-width: .2rem;
+    border-left-style: solid;
+    border-left-color: var(--fc-light-gray);
+    padding-left: 2rem;
+    border-right-width: .2rem;
+    border-right-style: solid;
+    border-right-color: var(--fc-light-gray);
+    padding-right: 2rem;
+}
+
+form {
+    margin-top: 1rem;
+}
