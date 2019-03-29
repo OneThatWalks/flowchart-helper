@@ -1,12 +1,8 @@
-export const SET_PROJECT = 'SET-PROJECT';
+export * from './project'
+export * from './navbar'
 
-interface SetProjectAction {
-    type: typeof SET_PROJECT,
-    data: string;
-}
-
-export type ProjectActionTypes = SetProjectAction;
-
-export interface ProjectState {
-    projectName: string;
+/*  MISC TYPES */
+export interface NavbarLink {
+    name: string
+    value: string
 }

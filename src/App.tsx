@@ -6,6 +6,7 @@ import GettingStarted from './components/GettingStarted/GettingStarted';
 import Navigator from './components/Navigator/Navigator';
 import Splash from './components/Splash/Splash';
 import Header from './components/Header/Header';
+import Dashboard from './components/Dashboard/Dashboard';
 
 const headerStyle = {
   height: "80px"
@@ -22,6 +23,7 @@ class App extends Component {
         
           <Route exact path="/" component={Splash} />
           <Route exact path="/getting-started" component={GettingStarted} />
+          <Route exact path="/dashboard" component={Dashboard} />
       </Router>
     );
   }

@@ -1,19 +1,26 @@
-import React, { Component, FormEvent } from 'react';
+import React, { FormEvent } from 'react';
 import './GettingStarted.css';
-import { ProjectState, SET_PROJECT } from '../../constants/types';
-import { setProject } from '../../actions';
+import { ProjectState, NavbarState } from '../../constants/types';
+import { setProject, removeLink, addLink } from '../../actions';
 import { connect } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
+import { Redirect } from 'react-router';
+import { navbarLinks } from '../../constants';
 
 export interface GettingStartedProps {
-    
+    start: boolean;
 }
 
 interface StateProps {
-    project: ProjectState
+    project: ProjectState,
+    navbar: NavbarState
 }
 
 interface DispatchProps {
-    setProject: typeof setProject
+    setProject: typeof setProject,
+    removeLink: typeof removeLink,
+    addLink: typeof addLink
 }
 
 type Props = StateProps & DispatchProps & GettingStartedProps;
@@ -26,6 +33,8 @@ class GettingStarted extends React.Component<Props> {
 
     handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        this.props.removeLink(navbarLinks[0]);
+        this.props.addLink(navbarLinks[1]);
     }
 
     handleProjectNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,6 +42,12 @@ class GettingStarted extends React.Component<Props> {
     }
 
     render() {
+        if (!this.props.navbar.links.find(link => link === navbarLinks[0])) {
+            return (
+                <Redirect to="/dashboard" />
+            )
+        }
+
         const { handleSubmit, handleProjectNameChange } = this;
         const pName = this.props.project.projectName;
         return (
@@ -45,6 +60,9 @@ class GettingStarted extends React.Component<Props> {
                                 <label htmlFor="projectName">Project Name</label>
                                 <input type="text" className="form-control" id="projectName" placeholder="flowchart-helper" value={pName} onChange={handleProjectNameChange} />
                             </div>
+                            <div className="form-group">
+                                <button type="submit" className="btn btn-default float-right"> <FontAwesomeIcon icon={faArrowRight} /></button>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -55,8 +73,9 @@ class GettingStarted extends React.Component<Props> {
 
 function mapStateToProps(state: StateProps, ownProps?: GettingStartedProps): StateProps {
     return {
-        project: state.project
+        project: state.project,
+        navbar: state.navbar
     };
 }
 
-export default connect(mapStateToProps, { setProject })(GettingStarted);
+export default connect(mapStateToProps, { setProject, removeLink, addLink })(GettingStarted);

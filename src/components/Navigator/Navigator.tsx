@@ -1,9 +1,26 @@
 import React, { Component } from 'react';
 import './Navigator.css';
 import { Link } from 'react-router-dom';
+import { NavbarState } from '../../constants/types';
+import UlNavLink from '../NavLink/UlNavLink';
+import { connect } from 'react-redux';
 
-class Navigator extends Component {
+export interface NavigatorProps {
+}
+interface StateProps {
+    navbar: NavbarState
+}
+
+type Props = StateProps & NavigatorProps;
+
+class Navigator extends Component<Props> {
+
+    constructor(props: Props) {
+        super(props);
+    }
+
     render() {
+        console.log(this.props.navbar)
         return (
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div className="container">
@@ -13,9 +30,9 @@ class Navigator extends Component {
                     </button>
                     <div className="collapse navbar-collapse" id="navbarContent">
                         <ul className="navbar-nav mr-auto">
-                            <li className="nav-item">
-                                <Link to="/getting-started" className="nav-link">Getting Started!</Link>
-                            </li>
+                            {this.props.navbar.links.map((nav, index) => {
+                                return <UlNavLink key={index} name={nav.name} value={nav.value} />
+                            })}
                         </ul>
                     </div>
                 </div>
@@ -24,4 +41,10 @@ class Navigator extends Component {
     }
 }
 
-export default Navigator;
+function mapStateToProps(state: StateProps, ownProps?: NavigatorProps): StateProps {
+    return {
+        navbar: state.navbar
+    }
+}
+
+export default connect(mapStateToProps)(Navigator);

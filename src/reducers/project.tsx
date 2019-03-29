@@ -1,12 +1,12 @@
-import { ProjectActionTypes, SET_PROJECT, ProjectState } from "../constants/types";
+import { ProjectActionTypes, SET_PROJECT_NAME, ProjectState } from "../constants/types";
 
 const initialState: ProjectState = {
-    projectName: 'Cats'
+    projectName: ''
 };
 
 function projectReducer(state = initialState, action: ProjectActionTypes): ProjectState {
     switch (action.type) {
-        case SET_PROJECT:
+        case SET_PROJECT_NAME:
             return {
                 ...state,
                 projectName: action.data
