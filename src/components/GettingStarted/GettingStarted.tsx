@@ -1,7 +1,7 @@
 import React, { FormEvent } from 'react';
 import './GettingStarted.css';
 import { ProjectState, NavbarState } from '../../constants/types';
-import { setProject, removeLink, addLink } from '../../actions';
+import { setProjectName, removeLink, addLink } from '../../actions';
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
@@ -18,7 +18,7 @@ interface StateProps {
 }
 
 interface DispatchProps {
-    setProject: typeof setProject,
+    setProjectName: typeof setProjectName,
     removeLink: typeof removeLink,
     addLink: typeof addLink
 }
@@ -38,7 +38,7 @@ class GettingStarted extends React.Component<Props> {
     }
 
     handleProjectNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        this.props.setProject(e.target.value)
+        this.props.setProjectName(e.target.value)
     }
 
     render() {
@@ -78,4 +78,4 @@ function mapStateToProps(state: StateProps, ownProps?: GettingStartedProps): Sta
     };
 }
 
-export default connect(mapStateToProps, { setProject, removeLink, addLink })(GettingStarted);
+export default connect(mapStateToProps, { setProjectName, removeLink, addLink })(GettingStarted);

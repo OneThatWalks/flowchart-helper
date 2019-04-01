@@ -1,8 +1,15 @@
-import { SET_PROJECT_NAME } from "../constants/types";
+import { SET_PROJECT_NAME, Persona, ADD_PERSONA } from "../constants/types";
 
-export function setProject(projectName: string) {
+export function setProjectName(projectName: string) {
     return {
         type: SET_PROJECT_NAME,
         data: projectName
+    }
+}
+
+export function addPersona(persona: Persona) {
+    return {
+        type: ADD_PERSONA,
+        data: persona
     }
 }

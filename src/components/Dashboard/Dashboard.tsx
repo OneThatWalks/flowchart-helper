@@ -1,7 +1,8 @@
-import React, { Component, FormEvent } from 'react';
-import { ProjectState, SET_PROJECT_NAME } from '../../constants/types';
-import { setProject } from '../../actions';
+import React from 'react';
+import { ProjectState } from '../../constants/types';
+import { setProjectName } from '../../actions';
 import { connect } from 'react-redux';
+import PersonaEditor from '../PersonaEditor/PersonaEditor';
 
 export interface DashboardProps {
 }
@@ -11,7 +12,7 @@ interface StateProps {
 }
 
 interface DispatchProps {
-    setProject: typeof setProject
+    setProjectName: typeof setProjectName
 }
 
 type Props = StateProps & DispatchProps & DashboardProps;
@@ -29,6 +30,7 @@ class Dashboard extends React.Component<Props, State> {
         return (
             <div className="container mt-3">
                 <p>Personas</p>
+                <PersonaEditor />
                 <p>Use Cases</p>
                 <p>Flows</p>
                 <p>Class Diagram</p>
@@ -43,4 +45,4 @@ function mapStateToProps(state: StateProps, ownProps?: DashboardProps): StatePro
     };
 }
 
-export default connect(mapStateToProps, { setProject })(Dashboard);
+export default connect(mapStateToProps, { setProject: setProjectName })(Dashboard);

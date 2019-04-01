@@ -12,7 +12,7 @@ div.project-title > span:first-child {
     text-transform: uppercase;
     white-space: nowrap;
     transform: translateX(0);
-    transition: 1.8s cubic-bezier(0.47, 0, 0.745, 0.715);
+    transition: 1.8s cubic-bezier(0.39, 0.575, 0.565, 1);
 }
 
 div.project-title:hover > span:first-child {
