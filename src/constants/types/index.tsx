@@ -8,6 +8,7 @@ export interface NavbarLink {
 }
 
 export interface Persona {
+    id: number;
     name: string;
     shortDescription: string;
     longDescription: string;

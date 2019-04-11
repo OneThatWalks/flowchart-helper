@@ -3,10 +3,11 @@ import React from "react";
 import { connect } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-import { addPersona } from "../../actions";
+import { updatePersona } from "../../actions";
+import './PersonaEditor.css';
 
 export interface PersonaEditorProps {
-
+    id: number;
 }
 
 interface StateProps {
@@ -14,10 +15,10 @@ interface StateProps {
 }
 
 interface DispatchProps {
-    addPersona: typeof addPersona;
+    updatePersona: typeof updatePersona;
 }
 
-type Props = StateProps & PersonaEditorProps;
+type Props = StateProps & PersonaEditorProps & DispatchProps;
 
 interface State {
     personaName: string;
@@ -40,7 +41,8 @@ class PersonaEditor extends React.Component<Props, State> {
 
     handleKeyUp = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'enter') {
-            addPersona({
+            this.props.updatePersona({
+                id: this.props.id,
                 name: this.state.personaName,
                 shortDescription: '',
                 longDescription: ''
@@ -52,12 +54,11 @@ class PersonaEditor extends React.Component<Props, State> {
         const { handlePersonaNameChange, handleKeyUp } = this;
         const personaName = this.state.personaName;
         return (
-            <div className="container">
+            <div className="persona-container fc-border">
                 <FontAwesomeIcon icon={faUser} size="7x" color="gray" />
-                <label htmlFor="personaName">Project Name</label>
+                <label htmlFor="personaName">Persona Name</label>
                 <input type="text" className="form-control" id="personaName" placeholder="End User" value={personaName} onChange={handlePersonaNameChange} onKeyUp={handleKeyUp} />
             </div>
-            //TODO: List other persona
         )
     }
 }
@@ -68,4 +69,4 @@ function mapStateToProps(state: StateProps, ownProps?: PersonaEditorProps): Stat
     }
 }
 
-export default connect(mapStateToProps, { addPersona })(PersonaEditor);
+export default connect(mapStateToProps, { updatePersona })(PersonaEditor);
