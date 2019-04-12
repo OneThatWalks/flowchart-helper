@@ -1,4 +1,4 @@
-import { ProjectActionTypes, SET_PROJECT_NAME, ProjectState, ADD_PERSONA, UPDATE_PERSONA } from "../constants/types";
+import { ProjectActionTypes, SET_PROJECT_NAME, ProjectState, ADD_PERSONA, UPDATE_PERSONA, REMOVE_PERSONA } from "../constants/types";
 
 const initialState: ProjectState = {
     projectName: '',
@@ -16,13 +16,22 @@ function projectReducer(state = initialState, action: ProjectActionTypes): Proje
             if (state.personas.find(persona => persona.id === action.data.id)) {
                 return state;
             }
-            
+
             if (action.data.id === 0) {
-                const maxId = Math.max.apply(Math, state.personas.map(p => p.id));
+                let maxId = Math.max.apply(Math, state.personas.map(p => p.id));
+
+                if (maxId == -Infinity) {
+                    maxId = 1;
+                } else {
+                    maxId = maxId + 1;
+                }
+
+                console.log(maxId);
                 const newAction = {
                     ...action.data,
                     id: maxId
                 };
+
                 return {
                     ...state,
                     personas: [...state.personas, newAction]
@@ -35,13 +44,20 @@ function projectReducer(state = initialState, action: ProjectActionTypes): Proje
             };
         case UPDATE_PERSONA:
             const findItem = state.personas.find(persona => persona.id === action.data.id);
+
             if (!findItem) {
                 return state;
             }
+
             return {
                 ...state,
-                personas: [...state.personas.filter(p => p.id === action.data.id), action.data]
-            }
+                personas: [...state.personas.filter(p => p.id !== action.data.id), action.data]
+            };
+        case REMOVE_PERSONA:
+            return {
+                ...state,
+                personas: [...state.personas.filter(p => p.id !== action.data)]
+            };
         default:
             return state;
     }

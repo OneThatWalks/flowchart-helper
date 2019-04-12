@@ -2,12 +2,12 @@ import { ProjectState, Persona } from "../../constants/types";
 import React from "react";
 import { connect } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser } from '@fortawesome/free-solid-svg-icons';
-import { updatePersona } from "../../actions";
+import { faUser, faUserSlash } from '@fortawesome/free-solid-svg-icons';
+import { updatePersona, removePersona } from "../../actions";
 import './PersonaEditor.css';
 
 export interface PersonaEditorProps {
-    id: number;
+    personaId: number;
 }
 
 interface StateProps {
@@ -16,6 +16,7 @@ interface StateProps {
 
 interface DispatchProps {
     updatePersona: typeof updatePersona;
+    removePersona: typeof removePersona;
 }
 
 type Props = StateProps & PersonaEditorProps & DispatchProps;
@@ -28,9 +29,10 @@ class PersonaEditor extends React.Component<Props, State> {
 
     constructor(props: Props) {
         super(props);
+        console.log(props);
         this.state = {
             personaName: ''
-        }
+        };
     }
 
     handlePersonaNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,7 +44,7 @@ class PersonaEditor extends React.Component<Props, State> {
     handleKeyUp = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'enter') {
             this.props.updatePersona({
-                id: this.props.id,
+                id: this.props.personaId,
                 name: this.state.personaName,
                 shortDescription: '',
                 longDescription: ''
@@ -50,23 +52,32 @@ class PersonaEditor extends React.Component<Props, State> {
         }
     }
 
+    handlePersonaRemove = (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
+        this.props.removePersona(this.props.personaId);
+    }
+
     render() {
-        const { handlePersonaNameChange, handleKeyUp } = this;
+        const { handlePersonaNameChange, handleKeyUp, handlePersonaRemove } = this;
         const personaName = this.state.personaName;
         return (
             <div className="persona-container fc-border">
-                <FontAwesomeIcon icon={faUser} size="7x" color="gray" />
-                <label htmlFor="personaName">Persona Name</label>
-                <input type="text" className="form-control" id="personaName" placeholder="End User" value={personaName} onChange={handlePersonaNameChange} onKeyUp={handleKeyUp} />
+                <span className="persona-close" onClick={handlePersonaRemove} title="Remove this persona">
+                    <FontAwesomeIcon icon={faUserSlash} size="1x" color="gray" />
+                </span>
+
+                <FontAwesomeIcon icon={faUser} size="6x" color="gray" />
+                {/* TODO: access short desc? work on update */}
+                <input type="text" className="form-control form-control-sm" id="personaName" placeholder="End User" value={personaName} onChange={handlePersonaNameChange} onKeyUp={handleKeyUp} />
             </div>
         )
     }
 }
 
-function mapStateToProps(state: StateProps, ownProps?: PersonaEditorProps): StateProps {
+function mapStateToProps(state: StateProps, ownProps: PersonaEditorProps): StateProps & PersonaEditorProps {
     return {
-        project: state.project
+        project: state.project,
+        personaId: ownProps.personaId
     }
 }
 
-export default connect(mapStateToProps, { updatePersona })(PersonaEditor);
+export default connect(mapStateToProps, { updatePersona, removePersona })(PersonaEditor);

@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import PersonaEditor from '../PersonaEditor/PersonaEditor';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import './Dashboard.css';
 
 export interface DashboardProps {
 }
@@ -29,7 +30,7 @@ class Dashboard extends React.Component<Props, State> {
     }
 
     mapPersonasToComponents = (nav: Persona, index: number) => {
-        return <PersonaEditor id={nav.id} />
+        return <PersonaEditor key={index} personaId={nav.id} />
     };
 
     personaAddHandler = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -45,9 +46,15 @@ class Dashboard extends React.Component<Props, State> {
         const { mapPersonasToComponents, personaAddHandler } = this;
         return (
             <div className="container mt-3">
-                <h3>Personas <button type="button" className="btn btn-link" onClick={personaAddHandler}><FontAwesomeIcon icon={faPlus} /></button></h3>
+                <h3>Personas
+                    <button type="button" className="btn btn-link" onClick={personaAddHandler}>
+                        <FontAwesomeIcon icon={faPlus} />
+                    </button>
+                </h3>
+                <div className="persona-carousel">
+                    {this.props.project.personas.map(mapPersonasToComponents)}
+                </div>
 
-                {this.props.project.personas.map(mapPersonasToComponents)}
                 <p>Use Cases</p>
                 <p>Flows</p>
                 <p>Class Diagram</p>
