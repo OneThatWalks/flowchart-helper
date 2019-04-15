@@ -5,6 +5,8 @@ const initialState: ProjectState = {
     personas: []
 };
 
+let personaIdCounter = 0;
+
 function projectReducer(state = initialState, action: ProjectActionTypes): ProjectState {
     switch (action.type) {
         case SET_PROJECT_NAME:
@@ -18,18 +20,15 @@ function projectReducer(state = initialState, action: ProjectActionTypes): Proje
             }
 
             if (action.data.id === 0) {
-                let maxId = Math.max.apply(Math, state.personas.map(p => p.id));
-
-                if (maxId == -Infinity) {
-                    maxId = 1;
-                } else {
-                    maxId = maxId + 1;
+                if (state.personas.find(p => p.name === '' && p.shortDescription === '')) {
+                    // Do not add more than one new persona
+                    return state;
                 }
+                personaIdCounter += 1;
 
-                console.log(maxId);
                 const newAction = {
                     ...action.data,
-                    id: maxId
+                    id: personaIdCounter
                 };
 
                 return {
