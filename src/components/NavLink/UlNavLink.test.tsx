@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Dashboard from './Dashboard';
+import UlNavLink from './UlNavLink';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render(<Dashboard />, div);
+  ReactDOM.render(<UlNavLink name={'Test'} value={'test'} />, div);
   ReactDOM.unmountComponentAtNode(div);
 });

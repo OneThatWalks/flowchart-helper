@@ -13,3 +13,10 @@ export interface Persona {
     shortDescription: string;
     longDescription: string;
 }
+
+export interface UseCase {
+    id: number;
+    useCase: string;
+}
+
+// TODO: Use case persona map, who can use what
