@@ -2,7 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { addUseCase, removeUseCase } from '../../actions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAddressCard } from '@fortawesome/free-solid-svg-icons';
+import { faAddressCard, faTrash } from '@fortawesome/free-solid-svg-icons';
+import './UseCaseEditor.css';
 
 export interface UseCaseEditorProps {
     useCaseId: number;
@@ -27,16 +28,16 @@ class UseCaseEditor extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
     }
-// TODO: connect to dashboard
+    
     render() {
         return (
             <div className="usecase-container fc-border">
                 <span className="usecase-close" onClick={() => {}} title="Remove this use case.">
-                    <FontAwesomeIcon icon={faAddressCard} size="1x" color="gray"/>
+                    <FontAwesomeIcon icon={faTrash} size="1x"/>
                 </span>
 
                 <FontAwesomeIcon icon={faAddressCard} size="4x" color="black" />
-                <textarea placeholder="Use Case" title="Enter a unit of work a user can do to interact your project." />
+                <input type="text" className="form-control form-control-sm" placeholder="Use Case" title="Enter a unit of work a user can do to interact your project." />
             </div>
         );
     }

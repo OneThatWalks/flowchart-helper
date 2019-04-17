@@ -1,21 +1,23 @@
 import React from 'react';
-import { ProjectState, Persona } from '../../constants/types';
-import { addPersona } from '../../actions';
+import { ProjectState, Persona, UseCase } from '../../constants/types';
+import { addPersona, addUseCase } from '../../actions';
 import { connect } from 'react-redux';
 import PersonaEditor from '../PersonaEditor/PersonaEditor';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import './Dashboard.css';
+import UseCaseEditor from '../UseCaseEditor/UseCaseEditor';
 
 export interface DashboardProps {
 }
 
 interface StateProps {
-    project: ProjectState
+    project: ProjectState;
 }
 
 interface DispatchProps {
-    addPersona: typeof addPersona
+    addPersona: typeof addPersona;
+    addUseCase: typeof addUseCase;
 }
 
 type Props = StateProps & DispatchProps & DashboardProps;
@@ -30,7 +32,7 @@ class Dashboard extends React.Component<Props, State> {
     }
 
     mapPersonasToComponents = (nav: Persona, index: number) => {
-        return <PersonaEditor key={index} personaId={nav.id} />
+        return <PersonaEditor key={index} personaId={nav.id} />;
     };
 
     personaAddHandler = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -42,8 +44,19 @@ class Dashboard extends React.Component<Props, State> {
         });
     }
 
+    mapUseCasesToComponents = (nav: UseCase, index: number) => {
+        return (<UseCaseEditor key={index} useCaseId={nav.id} />);
+    }
+
+    useCaseAddHandler = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        this.props.addUseCase({
+            id: 0,
+            useCase: ''
+        });
+    }
+
     render() {
-        const { mapPersonasToComponents, personaAddHandler } = this;
+        const { mapPersonasToComponents, personaAddHandler, mapUseCasesToComponents, useCaseAddHandler } = this;
         return (
             <div className="container mt-3">
                 <h3>Personas
@@ -51,11 +64,19 @@ class Dashboard extends React.Component<Props, State> {
                         <FontAwesomeIcon icon={faPlus} />
                     </button>
                 </h3>
-                <div className="persona-carousel">
+                <div className="item-carousel">
                     {this.props.project.personas.map(mapPersonasToComponents)}
                 </div>
 
-                <p>Use Cases</p>
+                <h3>Use Cases
+                    <button type="button" className="btn btn-link" onClick={useCaseAddHandler}>
+                        <FontAwesomeIcon icon={faPlus} />
+                    </button>
+                </h3>
+                <div className="item-carousel">
+                    {this.props.project.useCases.map(mapUseCasesToComponents)}
+                </div>
+
                 <p>Flows</p>
                 <p>Class Diagram</p>
             </div>
@@ -69,4 +90,4 @@ function mapStateToProps(state: StateProps, ownProps?: DashboardProps): StatePro
     };
 }
 
-export default connect(mapStateToProps, { addPersona })(Dashboard);
+export default connect(mapStateToProps, { addPersona, addUseCase })(Dashboard);
