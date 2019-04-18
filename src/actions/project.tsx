@@ -1,4 +1,4 @@
-import { SET_PROJECT_NAME, Persona, ADD_PERSONA, ProjectActionTypes, UPDATE_PERSONA, REMOVE_PERSONA, UseCase, ADD_USE_CASE, REMOVE_USE_CASE } from "../constants/types";
+import { SET_PROJECT_NAME, Persona, ADD_PERSONA, ProjectActionTypes, UPDATE_PERSONA, REMOVE_PERSONA, UseCase, ADD_USE_CASE, REMOVE_USE_CASE, UPDATE_USE_CASE } from "../constants/types";
 
 export function setProjectName(projectName: string): ProjectActionTypes {
     return {
@@ -39,5 +39,12 @@ export function removeUseCase(useCaseId: number): ProjectActionTypes {
     return {
         type: REMOVE_USE_CASE,
         data: useCaseId
+    }
+}
+
+export function updateUseCase(useCase: UseCase): ProjectActionTypes {
+    return {
+        type: UPDATE_USE_CASE,
+        data: useCase
     }
 }

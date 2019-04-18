@@ -1,4 +1,4 @@
-import { ProjectActionTypes, SET_PROJECT_NAME, ProjectState, ADD_PERSONA, UPDATE_PERSONA, REMOVE_PERSONA, ADD_USE_CASE, REMOVE_USE_CASE } from "../constants/types";
+import { ProjectActionTypes, SET_PROJECT_NAME, ProjectState, ADD_PERSONA, UPDATE_PERSONA, REMOVE_PERSONA, ADD_USE_CASE, REMOVE_USE_CASE, UPDATE_USE_CASE } from "../constants/types";
 
 const initialState: ProjectState = {
     projectName: '',
@@ -85,6 +85,17 @@ function projectReducer(state = initialState, action: ProjectActionTypes): Proje
             return {
                 ...state,
                 useCases: [...state.useCases, action.data]
+            };
+        case UPDATE_USE_CASE:
+            const findUseCase = state.useCases.find(usecase => usecase.id === action.data.id);
+
+            if (!findUseCase) {
+                return state;
+            }
+
+            return {
+                ...state,
+                useCases: [...state.useCases.filter(p => p.id !== action.data.id), action.data]
             };
         case REMOVE_USE_CASE:
             return {

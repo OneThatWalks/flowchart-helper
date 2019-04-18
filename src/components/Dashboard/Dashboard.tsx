@@ -59,25 +59,28 @@ class Dashboard extends React.Component<Props, State> {
         const { mapPersonasToComponents, personaAddHandler, mapUseCasesToComponents, useCaseAddHandler } = this;
         return (
             <div className="container mt-3">
-                <h3>Personas
+                <h3 className="mb-0">Personas
                     <button type="button" className="btn btn-link" onClick={personaAddHandler}>
                         <FontAwesomeIcon icon={faPlus} />
                     </button>
                 </h3>
+                <small>Who will be using your app?</small>
+
                 <div className="item-carousel">
                     {this.props.project.personas.map(mapPersonasToComponents)}
                 </div>
 
-                <h3>Use Cases
+                <h3 className="mb-0">Use Cases
                     <button type="button" className="btn btn-link" onClick={useCaseAddHandler}>
                         <FontAwesomeIcon icon={faPlus} />
                     </button>
                 </h3>
+                <small>What high level actions can your app do for these personas?</small>
                 <div className="item-carousel">
                     {this.props.project.useCases.map(mapUseCasesToComponents)}
                 </div>
 
-                <p>Flows</p>
+                <h3>Flows</h3>
                 <p>Class Diagram</p>
             </div>
         );

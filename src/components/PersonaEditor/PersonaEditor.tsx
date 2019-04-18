@@ -29,7 +29,6 @@ class PersonaEditor extends React.Component<Props, State> {
 
     constructor(props: Props) {
         super(props);
-        console.log(props);
         const existingPersona = props.project.personas.find(p => p.id === props.personaId);
         let name = '';
         if (existingPersona && existingPersona.name !== '') {
@@ -65,7 +64,6 @@ class PersonaEditor extends React.Component<Props, State> {
 
     handlePersonaRemove = (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
         const existing = this.props.project.personas.find(p => p.id === this.props.personaId);
-        console.log(existing);
         if (existing && existing.name === '') {
             this.props.removePersona(this.props.personaId);
             return;
