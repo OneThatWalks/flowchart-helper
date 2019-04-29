@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import './Dashboard.css';
 import { ProjectState } from '../../constants/types';
+import Requirements from '../Requirements/Requirements';
 
 export interface DashboardProps {
 }
@@ -28,10 +29,7 @@ class Dashboard extends React.Component<Props, State> {
     render() {
         return (
             <div className="container mt-3">
-                <h3>
-                    Requirements
-                </h3>
-
+                <Requirements />
                 <h3>
                     Flows
                 </h3>

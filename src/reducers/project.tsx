@@ -1,7 +1,8 @@
 import { ProjectActionTypes, SET_PROJECT_NAME, ProjectState } from "../constants/types";
 
 const initialState: ProjectState = {
-    projectName: ''
+    projectName: '',
+    requirements: []
 };
 
 function projectReducer(state = initialState, action: ProjectActionTypes): ProjectState {
