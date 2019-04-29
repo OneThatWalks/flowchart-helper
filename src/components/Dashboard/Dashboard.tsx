@@ -1,12 +1,7 @@
 import React from 'react';
-import { ProjectState, Persona, UseCase } from '../../constants/types';
-import { addPersona, addUseCase } from '../../actions';
 import { connect } from 'react-redux';
-import PersonaEditor from '../PersonaEditor/PersonaEditor';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import './Dashboard.css';
-import UseCaseEditor from '../UseCaseEditor/UseCaseEditor';
+import { ProjectState } from '../../constants/types';
 
 export interface DashboardProps {
 }
@@ -16,8 +11,6 @@ interface StateProps {
 }
 
 interface DispatchProps {
-    addPersona: typeof addPersona;
-    addUseCase: typeof addUseCase;
 }
 
 type Props = StateProps & DispatchProps & DashboardProps;
@@ -31,57 +24,20 @@ class Dashboard extends React.Component<Props, State> {
         super(props);
     }
 
-    mapPersonasToComponents = (nav: Persona, index: number) => {
-        return <PersonaEditor key={index} personaId={nav.id} />;
-    };
-
-    personaAddHandler = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        this.props.addPersona({
-            id: 0,
-            name: '',
-            shortDescription: '',
-            longDescription: ''
-        });
-    }
-
-    mapUseCasesToComponents = (nav: UseCase, index: number) => {
-        return (<UseCaseEditor key={index} useCaseId={nav.id} />);
-    }
-
-    useCaseAddHandler = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        this.props.addUseCase({
-            id: 0,
-            useCase: ''
-        });
-    }
 
     render() {
-        const { mapPersonasToComponents, personaAddHandler, mapUseCasesToComponents, useCaseAddHandler } = this;
         return (
             <div className="container mt-3">
-                <h3 className="mb-0">Personas
-                    <button type="button" className="btn btn-link" onClick={personaAddHandler}>
-                        <FontAwesomeIcon icon={faPlus} />
-                    </button>
+                <h3>
+                    Requirements
                 </h3>
-                <small>Who will be using your app?</small>
 
-                <div className="item-carousel">
-                    {this.props.project.personas.map(mapPersonasToComponents)}
-                </div>
-
-                <h3 className="mb-0">Use Cases
-                    <button type="button" className="btn btn-link" onClick={useCaseAddHandler}>
-                        <FontAwesomeIcon icon={faPlus} />
-                    </button>
+                <h3>
+                    Flows
                 </h3>
-                <small>What high level actions can your app do for these personas?</small>
-                <div className="item-carousel">
-                    {this.props.project.useCases.map(mapUseCasesToComponents)}
-                </div>
-
-                <h3>Flows</h3>
-                <p>Class Diagram</p>
+                <h3>
+                    Class Diagram
+                </h3>
             </div>
         );
     }
@@ -93,4 +49,4 @@ function mapStateToProps(state: StateProps, ownProps?: DashboardProps): StatePro
     };
 }
 
-export default connect(mapStateToProps, { addPersona, addUseCase })(Dashboard);
+export default connect(mapStateToProps, {})(Dashboard);
