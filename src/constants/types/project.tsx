@@ -14,7 +14,10 @@ interface AddRequirementAction {
 
 interface RemoveRequirementAction {
     type: typeof REMOVE_REQUIREMENT;
-    data: string;
+    data: {
+        requirement: string,
+        index: number
+    };
 }
 
 export type ProjectActionTypes = SetProjectAction | AddRequirementAction | RemoveRequirementAction;
