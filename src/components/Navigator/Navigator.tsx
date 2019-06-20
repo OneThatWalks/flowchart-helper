@@ -20,7 +20,6 @@ class Navigator extends Component<Props> {
     }
 
     render() {
-        console.log(this.props.navbar)
         return (
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div className="container">
