@@ -8,24 +8,24 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import { Redirect } from 'react-router';
 import { navbarLinks } from '../../constants';
 
-export interface GettingStartedProps {
+export interface IGettingStartedOwnProps {
     start: boolean;
 }
 
-interface StateProps {
+export interface IGettingStartedStateProps {
     project: ProjectState;
     navbar: NavbarState;
 }
 
-interface DispatchProps {
+export interface IGettingStartedDispatchProps {
     setProjectName: typeof setProjectName;
     removeLink: typeof removeLink;
     addLink: typeof addLink;
 }
 
-type Props = StateProps & DispatchProps & GettingStartedProps;
+export type GettingStartedProps = IGettingStartedStateProps & IGettingStartedDispatchProps & IGettingStartedOwnProps;
 
-class GettingStarted extends React.Component<Props> {
+export class GettingStarted extends React.Component<GettingStartedProps> {
 
     handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -38,7 +38,7 @@ class GettingStarted extends React.Component<Props> {
     }
 
     render() {
-        if (!this.props.navbar.links.find(link => link === navbarLinks[0])) {
+        if (this.props.project.projectName !== '') {
             return (
                 <Redirect to="/dashboard" />
             );
@@ -67,7 +67,7 @@ class GettingStarted extends React.Component<Props> {
     }
 }
 
-function mapStateToProps(state: StateProps, ownProps?: GettingStartedProps): StateProps {
+function mapStateToProps(state: IGettingStartedStateProps, ownProps?: IGettingStartedOwnProps): IGettingStartedStateProps {
     return {
         project: state.project,
         navbar: state.navbar

@@ -4,22 +4,19 @@ import './Dashboard.css';
 import { ProjectState } from '../../constants/types';
 import Requirements from '../Requirements/Requirements';
 
-export interface DashboardProps {
+export interface IDashboardOwnProps {
 }
 
-interface StateProps {
+export interface IDashboardStateProps {
     project: ProjectState;
 }
 
-interface DispatchProps {
+export interface IDashboardDispatchProps {
 }
 
-type Props = StateProps & DispatchProps & DashboardProps;
+export type DashboardProps = IDashboardStateProps & IDashboardDispatchProps & IDashboardOwnProps;
 
-interface State {
-}
-
-class Dashboard extends React.Component<Props, State> {
+export class Dashboard extends React.Component<DashboardProps> {
     
     render() {
         return (
@@ -36,7 +33,7 @@ class Dashboard extends React.Component<Props, State> {
     }
 }
 
-function mapStateToProps(state: StateProps, ownProps?: DashboardProps): StateProps {
+function mapStateToProps(state: IDashboardStateProps, ownProps?: IDashboardOwnProps): IDashboardStateProps {
     return {
         project: state.project
     };
