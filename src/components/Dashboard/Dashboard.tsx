@@ -20,12 +20,7 @@ interface State {
 }
 
 class Dashboard extends React.Component<Props, State> {
-
-    constructor(props: Props) {
-        super(props);
-    }
-
-
+    
     render() {
         return (
             <div className="container mt-3">

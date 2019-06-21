@@ -15,10 +15,6 @@ type Props = StateProps & NavigatorProps;
 
 class Navigator extends Component<Props> {
 
-    constructor(props: Props) {
-        super(props);
-    }
-
     render() {
         return (
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -43,7 +39,7 @@ class Navigator extends Component<Props> {
 function mapStateToProps(state: StateProps, ownProps?: NavigatorProps): StateProps {
     return {
         navbar: state.navbar
-    }
+    };
 }
 
 export default connect(mapStateToProps)(Navigator);

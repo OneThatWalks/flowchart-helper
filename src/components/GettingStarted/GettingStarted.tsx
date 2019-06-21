@@ -13,23 +13,19 @@ export interface GettingStartedProps {
 }
 
 interface StateProps {
-    project: ProjectState,
-    navbar: NavbarState
+    project: ProjectState;
+    navbar: NavbarState;
 }
 
 interface DispatchProps {
-    setProjectName: typeof setProjectName,
-    removeLink: typeof removeLink,
-    addLink: typeof addLink
+    setProjectName: typeof setProjectName;
+    removeLink: typeof removeLink;
+    addLink: typeof addLink;
 }
 
 type Props = StateProps & DispatchProps & GettingStartedProps;
 
 class GettingStarted extends React.Component<Props> {
-
-    constructor(props: Props) {
-        super(props);
-    }
 
     handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -38,14 +34,14 @@ class GettingStarted extends React.Component<Props> {
     }
 
     handleProjectNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        this.props.setProjectName(e.target.value)
+        this.props.setProjectName(e.target.value);
     }
 
     render() {
         if (!this.props.navbar.links.find(link => link === navbarLinks[0])) {
             return (
                 <Redirect to="/dashboard" />
-            )
+            );
         }
 
         const { handleSubmit, handleProjectNameChange } = this;

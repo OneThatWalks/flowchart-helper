@@ -7,10 +7,6 @@ type Props = NavbarLink;
 
 class UlNavLink extends React.Component<Props> {
 
-    constructor(props: Props) {
-        super(props);
-    }
-
     render() {
         return (
                 <li className="nav-item">

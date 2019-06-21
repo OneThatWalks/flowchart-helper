@@ -14,7 +14,7 @@ function navbarReducer(state = initialState, action: NavbarLinkActionTypes): Nav
                 return {
                     ...state,
                     links: [...state.links, action.data]
-                }
+                };
             } else {
                 return state;
             }
@@ -24,8 +24,8 @@ function navbarReducer(state = initialState, action: NavbarLinkActionTypes): Nav
         } else {
             return {
                 ...state,
-                links: state.links.filter(link => link.value != action.data.value)
-            }
+                links: state.links.filter(link => link.value !== action.data.value)
+            };
         }
         default:
             return state;

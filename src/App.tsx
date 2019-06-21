@@ -11,7 +11,7 @@ const headerStyle = {
   height: "80px"
 };
 
-class App extends Component {
+export class App extends Component {
   render() {
     return (
       <Router>

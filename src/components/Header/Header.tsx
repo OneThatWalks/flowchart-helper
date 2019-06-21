@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { ProjectState } from '../../constants/types';
 import { connect } from 'react-redux';
 import './Header.css';
@@ -8,15 +8,12 @@ export interface HeaderProps {
 }
 
 interface StateProps {
-    project: ProjectState
+    project: ProjectState;
 }
+
 type Props = StateProps & HeaderProps;
 
 class Header extends React.Component<Props> {
-
-    constructor(props: Props) {
-        super(props);
-    }
 
     render() {
         return (
