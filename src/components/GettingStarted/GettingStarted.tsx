@@ -9,7 +9,6 @@ import { Redirect } from 'react-router';
 import { navbarLinks } from '../../constants';
 
 export interface IGettingStartedOwnProps {
-    start: boolean;
 }
 
 export interface IGettingStartedStateProps {
@@ -23,29 +22,53 @@ export interface IGettingStartedDispatchProps {
     addLink: typeof addLink;
 }
 
+export interface IGettingStartedState {
+    submitted: boolean;
+    name: string;
+}
+
 export type GettingStartedProps = IGettingStartedStateProps & IGettingStartedDispatchProps & IGettingStartedOwnProps;
 
-export class GettingStarted extends React.Component<GettingStartedProps> {
+export type GettingStartedState = IGettingStartedState;
+
+export class GettingStarted extends React.Component<GettingStartedProps, GettingStartedState> {
+
+    /**
+     *
+     */
+    constructor(props: GettingStartedProps) {
+        super(props);
+        this.state = {
+            submitted: false,
+            name: props.project.projectName
+        };
+    }
 
     handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        this.props.removeLink(navbarLinks[0]);
-        this.props.addLink(navbarLinks[1]);
+        this.props.setProjectName(this.state.name);
+        this.setState({
+            ...this.state,
+            submitted: true
+        });
     }
 
     handleProjectNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        this.props.setProjectName(e.target.value);
+        this.setState({
+            ...this.state,
+            name: e.currentTarget.value
+        })
     }
 
     render() {
-        if (this.props.project.projectName !== '') {
+        if (this.state.submitted) {
             return (
                 <Redirect to="/dashboard" />
             );
         }
 
         const { handleSubmit, handleProjectNameChange } = this;
-        const pName = this.props.project.projectName;
+        const pName = this.state.name;
         return (
             <div className="container h-100">
                 <div className="row h-100 justify-content-center align-items-center">
@@ -74,4 +97,4 @@ function mapStateToProps(state: IGettingStartedStateProps, ownProps?: IGettingSt
     };
 }
 
-export default connect(mapStateToProps, { setProjectName, removeLink, addLink })(GettingStarted);
+export default connect(mapStateToProps, { setProjectName })(GettingStarted);
