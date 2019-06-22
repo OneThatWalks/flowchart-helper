@@ -1,4 +1,5 @@
 # flowchart-helper
+[![Build Status](https://onethatwalks.visualstudio.com/flowchart-helper/_apis/build/status/OneThatWalks.flowchart-helper?branchName=master)](https://onethatwalks.visualstudio.com/flowchart-helper/_build/latest?definitionId=1&branchName=master)
 
 flowchart-helper is personal project to make building and architecting applications easier.
 
