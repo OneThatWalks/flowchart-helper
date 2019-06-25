@@ -15,7 +15,6 @@ describe('GettingStarted Component', () => {
       addLink: addLink,
       removeLink: removeLink,
       setProjectName: setProjectName,
-      start: true,
       navbar: {
         links: []
       },
@@ -30,8 +29,6 @@ describe('GettingStarted Component', () => {
 
   it('renders without crashing', () => {
     expect(wrapper).not.toBe(undefined);
-
-    expect(wrapper.find('div').first().hasClass('container h-100')).toBe(true);
   });
 
   it('calls set project name when input changed', () => {
@@ -41,14 +38,26 @@ describe('GettingStarted Component', () => {
         value: 't'
       }
     });
-    expect(setProjectName.mock.calls.length).toBe(1);
+    expect(wrapper.state('name')).toEqual('t');
   });
 
   // TODO: watch https://github.com/facebook/jest/issues/2441
   it('submits successfully', () => {
-    const sumbit: ShallowWrapper<HTMLAttributes, any, React.Component<{}, {}, any>> = wrapper.find('button[type="submit"]').first();
-    sumbit.simulate('submit');
-    expect(removeLink.mock.calls.length).toBe(1);
-    expect(addLink.mock.calls.length).toBe(1);
+    // find form
+    const submit: ShallowWrapper<HTMLAttributes, any, React.Component<{}, {}, any>> = wrapper.find('form').first();
+    // find input
+    const input: ShallowWrapper<HTMLAttributes, any, React.Component<{}, {}, any>> = wrapper.find('input[id="projectName"]').first();
+    // simulate input
+    input.simulate('change', {
+      target: {
+        value: 'test'
+      }
+    });
+    // simulate submit
+    submit.simulate('submit', {
+      preventDefault: () => { }
+    });
+    //
+    expect(setProjectName.mock.calls.length).toBe(1);
   });
 });

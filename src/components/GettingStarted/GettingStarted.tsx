@@ -56,7 +56,7 @@ export class GettingStarted extends React.Component<GettingStartedProps, Getting
     handleProjectNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         this.setState({
             ...this.state,
-            name: e.currentTarget.value
+            name: e.target.value
         })
     }
 
