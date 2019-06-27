@@ -1,9 +1,31 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Navigator from './Navigator';
+import { ShallowWrapper, shallow } from 'enzyme';
+import { Navigator, NavigatorProps } from './Navigator';
+import UlNavLink from 'components/UlNavLink/UlNavLink';
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<Navigator />, div);
-  ReactDOM.unmountComponentAtNode(div);
+describe('Navigator Component', () => {
+
+	let wrapper: ShallowWrapper;
+	let props: NavigatorProps;
+
+	beforeEach(() => {
+		props = {
+			navbar: {
+				links: [{ name: 'test', value: 'test' }]
+			}
+		};
+
+		wrapper = shallow(<Navigator {...props} />);
+	});
+
+	it('renders without crashing', () => {
+		// Act & Assert
+		expect(wrapper).not.toBe(undefined);
+	});
+
+	it('renders test link', () => {
+		// Act & Assert
+		expect(wrapper.contains(<UlNavLink key={0} name={props.navbar.links[0].name} value={props.navbar.links[0].value} />))
+	});
 });

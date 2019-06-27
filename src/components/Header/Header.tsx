@@ -3,17 +3,17 @@ import { ProjectState } from '../../constants/types';
 import { connect } from 'react-redux';
 import './Header.css';
 
-export interface HeaderProps {
+export interface HeaderOwnProps {
 
 }
 
-interface StateProps {
+export interface HeaderStateProps {
     project: ProjectState;
 }
 
-type Props = StateProps & HeaderProps;
+export type HeaderProps = HeaderStateProps & HeaderOwnProps;
 
-class Header extends React.Component<Props> {
+export class Header extends React.Component<HeaderProps> {
 
     render() {
         return (
@@ -26,7 +26,7 @@ class Header extends React.Component<Props> {
     }
 }
 
-function mapStateToProps(state: StateProps, ownProps?: any): StateProps {
+function mapStateToProps(state: HeaderStateProps, ownProps?: any): HeaderStateProps {
     return {
         project: state.project
     };

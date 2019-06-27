@@ -2,18 +2,18 @@ import React, { Component } from 'react';
 import './Navigator.css';
 import { Link } from 'react-router-dom';
 import { NavbarState } from '../../constants/types';
-import UlNavLink from '../NavLink/UlNavLink';
+import UlNavLink from '../UlNavLink/UlNavLink';
 import { connect } from 'react-redux';
 
-export interface NavigatorProps {
+export interface NavigatorOwnProps {
 }
-interface StateProps {
+export interface NavigatorStateProps {
     navbar: NavbarState
 }
 
-type Props = StateProps & NavigatorProps;
+export type NavigatorProps = NavigatorStateProps & NavigatorOwnProps;
 
-class Navigator extends Component<Props> {
+export class Navigator extends Component<NavigatorProps> {
 
     render() {
         return (
@@ -36,7 +36,7 @@ class Navigator extends Component<Props> {
     }
 }
 
-function mapStateToProps(state: StateProps, ownProps?: NavigatorProps): StateProps {
+function mapStateToProps(state: NavigatorStateProps, ownProps?: NavigatorOwnProps): NavigatorStateProps {
     return {
         navbar: state.navbar
     };

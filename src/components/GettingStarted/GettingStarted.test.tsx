@@ -1,7 +1,7 @@
 import React from 'react';
-import { ShallowWrapper, shallow, CommonWrapper, HTMLAttributes, mount } from "enzyme";
+import { ShallowWrapper, shallow, HTMLAttributes } from "enzyme";
 import { GettingStartedProps, GettingStarted } from "./GettingStarted";
-import { MemoryRouter, Redirect } from 'react-router';
+import { Redirect } from 'react-router';
 
 
 describe('GettingStarted Component', () => {
@@ -9,7 +9,7 @@ describe('GettingStarted Component', () => {
 	let wrapper: ShallowWrapper;
 	let props: GettingStartedProps;
 
-	const [addLink, removeLink, setProjectName] = new Array<jest.Mock<any, any>>(3).fill(jest.fn());
+	const [setProjectName] = new Array<jest.Mock<any, any>>(3).fill(jest.fn());
 
 	beforeEach(() => {
 		props = {
@@ -27,7 +27,7 @@ describe('GettingStarted Component', () => {
 	});
 
 	it('renders without crashing', () => {
-		// Act & Assert
+		// Assert
 		expect(wrapper).not.toBe(undefined);
 	});
 

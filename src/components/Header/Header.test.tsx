@@ -1,9 +1,30 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import Header from './Header';
+import { Header, HeaderProps } from './Header';
+import { ShallowWrapper, shallow } from 'enzyme';
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<Header />, div);
-  ReactDOM.unmountComponentAtNode(div);
+describe('Header Component', () => {
+	let wrapper: ShallowWrapper;
+	let props: HeaderProps;
+
+	beforeEach(() => {
+		props = {
+			project: {
+				projectName: 'test',
+				requirements: []
+			}
+		}
+
+		wrapper = shallow(<Header {...props} />);
+	});
+
+	it('renders without crashing', () => {
+		// Act & Assert
+		expect(wrapper).not.toBe(undefined);
+	});
+
+	it('displays project name', () => {
+		// Act & Assert
+		expect(wrapper.contains(<span>{props.project.projectName}</span>)).toEqual(true);
+	});
+
 });
