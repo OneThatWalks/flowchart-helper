@@ -1,12 +1,11 @@
 import React, { FormEvent } from 'react';
 import './GettingStarted.css';
 import { ProjectState, NavbarState } from '../../constants/types';
-import { setProjectName, removeLink, addLink } from '../../actions';
+import { setProjectName } from '../../actions';
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import { Redirect } from 'react-router';
-import { navbarLinks } from '../../constants';
 
 export interface IGettingStartedOwnProps {
 }
@@ -18,8 +17,6 @@ export interface IGettingStartedStateProps {
 
 export interface IGettingStartedDispatchProps {
     setProjectName: typeof setProjectName;
-    removeLink: typeof removeLink;
-    addLink: typeof addLink;
 }
 
 export interface IGettingStartedState {
@@ -33,9 +30,6 @@ export type GettingStartedState = IGettingStartedState;
 
 export class GettingStarted extends React.Component<GettingStartedProps, GettingStartedState> {
 
-    /**
-     *
-     */
     constructor(props: GettingStartedProps) {
         super(props);
         this.state = {
@@ -62,6 +56,7 @@ export class GettingStarted extends React.Component<GettingStartedProps, Getting
 
     render() {
         if (this.state.submitted) {
+            // Redirect if the component was submitted
             return (
                 <Redirect to="/dashboard" />
             );
@@ -69,6 +64,7 @@ export class GettingStarted extends React.Component<GettingStartedProps, Getting
 
         const { handleSubmit, handleProjectNameChange } = this;
         const pName = this.state.name;
+
         return (
             <div className="container h-100">
                 <div className="row h-100 justify-content-center align-items-center">
