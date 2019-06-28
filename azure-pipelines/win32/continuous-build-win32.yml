@@ -13,3 +13,15 @@ steps:
 - powershell: |
     yarn
   displayName: Yarn Install Dependencies
+
+- script: yarn test
+
+- script: yarn build
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(System.DefaultWorkingDirectory)'
+    Contents: build\
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+- task: PublishBuildArtifacts@1
