@@ -5,7 +5,7 @@ const initialState: ProjectState = {
 	requirements: []
 };
 
-function projectReducer(state = initialState, action: ProjectActionTypes): ProjectState {
+function projectReducer(state: ProjectState = initialState, action: ProjectActionTypes): ProjectState {
 	switch (action.type) {
 		case SET_PROJECT_NAME:
 			return {
@@ -20,7 +20,7 @@ function projectReducer(state = initialState, action: ProjectActionTypes): Proje
 		case REMOVE_REQUIREMENT:
 			return {
 				...state,
-				requirements: state.requirements.filter((value: Requirement, index: number) => { return value.id === action.data.id })
+				requirements: state.requirements.filter((value: Requirement, index: number) => { return value.id !== action.data.id })
 			}
 		default:
 			return state;
