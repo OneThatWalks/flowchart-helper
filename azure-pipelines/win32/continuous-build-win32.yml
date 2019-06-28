@@ -9,19 +9,23 @@ steps:
     versionSpec: '1.x'
     checkLatest: true
 
-
-- powershell: |
-    yarn
+- script: yarn
   displayName: Yarn Install Dependencies
 
 - script: yarn test
+  timeoutInMinutes: 5
+  displayName: Run Tests
 
 - script: yarn build
+  timeoutInMinutes: 5
+  displayName: Build
 
 - task: CopyFiles@2
   inputs:
     SourceFolder: '$(System.DefaultWorkingDirectory)'
     Contents: build\
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
+  displayName: Copy Files
 
 - task: PublishBuildArtifacts@1
+  displayName: Publish Artifact
