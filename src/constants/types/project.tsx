@@ -2,22 +2,19 @@ export const SET_PROJECT_NAME = 'SET_PROJECT_NAME';
 export const ADD_REQUIREMENT = 'ADD_REQUIREMENT';
 export const REMOVE_REQUIREMENT = 'REMOVE_REQUIREMENT';
 
-interface SetProjectAction {
+export interface SetProjectAction {
     type: typeof SET_PROJECT_NAME;
     data: string;
 }
 
-interface AddRequirementAction {
+export interface AddRequirementAction {
     type: typeof ADD_REQUIREMENT;
-    data: string;
+    data: Requirement;
 }
 
-interface RemoveRequirementAction {
+export interface RemoveRequirementAction {
     type: typeof REMOVE_REQUIREMENT;
-    data: {
-        requirement: string,
-        index: number
-    };
+    data: Requirement;
 }
 
 export type ProjectActionTypes = SetProjectAction | AddRequirementAction | RemoveRequirementAction;
@@ -31,5 +28,10 @@ export interface ProjectState {
     /**
      * Project requirements
      */
-    requirements: string[];
+    requirements: Requirement[];
+}
+
+export interface Requirement {
+	id: number;
+	name: string;
 }

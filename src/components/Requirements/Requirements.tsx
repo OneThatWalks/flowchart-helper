@@ -1,50 +1,48 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { ProjectState } from '../../constants/types';
+import { ProjectState, Requirement } from '../../constants/types';
 import { addRequirement, removeRequirement } from '../../actions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
-export interface RequirementsProps {
+export interface RequirementsOwnProps {
 }
 
-interface StateProps {
+export interface RequirementsStateProps {
     project: ProjectState;
 }
 
-interface DispatchProps {
+export interface RequirementsDispatchProps {
     addRequirement: typeof addRequirement;
     removeRequirement: typeof removeRequirement;
 }
 
-type Props = StateProps & DispatchProps & RequirementsProps;
+export type RequirementsProps = RequirementsStateProps & RequirementsDispatchProps & RequirementsOwnProps;
 
-interface RequirementsState {
+export interface RequirementsState {
     input: string;
 }
 
-type State = RequirementsState;
+export class Requirements extends React.Component<RequirementsProps, RequirementsState> {
 
-class Requirements extends React.Component<Props, State> {
-
-    constructor(props: Props) {
+    constructor(props: RequirementsProps) {
         super(props);
         this.state = {
             input: ''
-        }
+        };
     }
 
-    mapRequirementsToListElements = (item: string, index: number): JSX.Element => {
+    mapRequirementsToListElements = (item: Requirement, index: number): JSX.Element => {
         const { removeRequirement } = this;
         return (
-            <li key={index}>{item}
-                <button className="btn btn-link" onClick={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {removeRequirement(item, index);}}><FontAwesomeIcon icon={faTrash} /></button>
+            <li key={index}>{item.name}
+                <button className="btn btn-link" onClick={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {removeRequirement(item);}}><FontAwesomeIcon icon={faTrash} /></button>
             </li>
         );
     }
 
-    removeRequirement = (requirement: string, index: number): void => {
-        this.props.removeRequirement(requirement, index);
+    removeRequirement = (requirement: Requirement): void => {
+        this.props.removeRequirement(requirement);
     }
 
     addRequirement = (e: React.KeyboardEvent<HTMLInputElement>): void => {
@@ -52,9 +50,14 @@ class Requirements extends React.Component<Props, State> {
         if (e.key.toLowerCase() === 'enter') {
             if (this.state.input.length === 0) {
                 return;
-            }
+			}
 
-            this.props.addRequirement(e.currentTarget.value);
+            this.props.addRequirement({
+				id: 0,
+				// currentTarget is the target that triggered the event (A.K.A the input field)
+				name: e.currentTarget.value
+			});
+
             this.setState({ input: '' });
         }
     }
@@ -73,7 +76,7 @@ class Requirements extends React.Component<Props, State> {
                 <ul>
                     {requirements.map((item, index) => mapRequirementsToListElements(item, index))}
                     <li>
-                        <input type="text" value={input} onKeyUp={addRequirement} onChange={inputOnChange} />
+                        <input type="text" className="form-control form-control-sm" value={input} onKeyUp={addRequirement} onChange={inputOnChange} />
                     </li>
                 </ul>
             </div>
@@ -82,7 +85,7 @@ class Requirements extends React.Component<Props, State> {
 
 }
 
-function mapStateToProps(state: StateProps, ownProps?: RequirementsProps): StateProps & RequirementsProps {
+function mapStateToProps(state: RequirementsStateProps, ownProps?: RequirementsOwnProps): RequirementsStateProps & RequirementsOwnProps {
     return {
         project: state.project
     };

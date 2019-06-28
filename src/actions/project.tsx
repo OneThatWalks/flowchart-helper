@@ -1,25 +1,22 @@
-import { SET_PROJECT_NAME, ProjectActionTypes, ADD_REQUIREMENT, REMOVE_REQUIREMENT } from "../constants/types";
+import { SET_PROJECT_NAME, ProjectActionTypes, ADD_REQUIREMENT, REMOVE_REQUIREMENT, Requirement, AddRequirementAction, RemoveRequirementAction, SetProjectAction } from "../constants/types";
 
-export function setProjectName(projectName: string): ProjectActionTypes {
+export function setProjectName(projectName: string): SetProjectAction {
     return {
         type: SET_PROJECT_NAME,
         data: projectName
-    }
+    };
 }
 
-export function addRequirement(requirement: string): ProjectActionTypes {
+export function addRequirement(requirement: Requirement): AddRequirementAction {
     return {
         type: ADD_REQUIREMENT,
         data: requirement
-    }
+    };
 }
 
-export function removeRequirement(requirement: string, index: number): ProjectActionTypes {
+export function removeRequirement(requirement: Requirement): RemoveRequirementAction {
     return {
         type: REMOVE_REQUIREMENT,
-        data: {
-            requirement: requirement,
-            index: index
-        }
-    }
+        data: requirement
+    };
 }

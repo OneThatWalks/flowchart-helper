@@ -8,10 +8,11 @@ describe('GettingStarted Component', () => {
 
 	let wrapper: ShallowWrapper;
 	let props: GettingStartedProps;
-
-	const [setProjectName] = new Array<jest.Mock<any, any>>(3).fill(jest.fn());
+	let setProjectName: jest.Mock<any, any>;
 
 	beforeEach(() => {
+		setProjectName = jest.fn();
+
 		props = {
 			setProjectName: setProjectName,
 			navbar: {
