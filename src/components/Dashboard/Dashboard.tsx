@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import './Dashboard.css';
 import { ProjectState } from '../../constants/types';
 import Requirements from '../Requirements/Requirements';
+import Flows from 'components/Flows/Flows';
 
 export interface IDashboardOwnProps {
 }
@@ -17,14 +18,12 @@ export interface IDashboardDispatchProps {
 export type DashboardProps = IDashboardStateProps & IDashboardDispatchProps & IDashboardOwnProps;
 
 export class Dashboard extends React.Component<DashboardProps> {
-    
+
     render() {
         return (
             <div className="container mt-3">
                 <Requirements />
-                <h3>
-                    Flows
-                </h3>
+                <Flows />
                 <h3>
                     Class Diagram
                 </h3>

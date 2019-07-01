@@ -28,10 +28,21 @@ export interface ProjectState {
     /**
      * Project requirements
      */
-    requirements: Requirement[];
+	requirements: Requirement[];
+
+	/**
+	 * Project Flows
+	 */
+	flows: Flow[];
 }
 
 export interface Requirement {
 	id: number;
 	name: string;
+}
+
+export interface Flow {
+	id: number;
+	name: string;
+
 }
