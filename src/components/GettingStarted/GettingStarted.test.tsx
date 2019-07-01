@@ -2,6 +2,7 @@ import React from 'react';
 import { ShallowWrapper, shallow, HTMLAttributes } from "enzyme";
 import { GettingStartedProps, GettingStarted } from "./GettingStarted";
 import { Redirect } from 'react-router';
+import { testProject } from 'setupTests';
 
 
 describe('GettingStarted Component', () => {
@@ -19,8 +20,8 @@ describe('GettingStarted Component', () => {
 				links: []
 			},
 			project: {
-				projectName: '',
-				requirements: []
+				...testProject,
+				projectName: ''
 			}
 		};
 

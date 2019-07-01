@@ -1,6 +1,7 @@
 import React from 'react';
 import { Header, HeaderProps } from './Header';
 import { ShallowWrapper, shallow } from 'enzyme';
+import { testProject } from 'setupTests';
 
 describe('Header Component', () => {
 	let wrapper: ShallowWrapper;
@@ -9,8 +10,8 @@ describe('Header Component', () => {
 	beforeEach(() => {
 		props = {
 			project: {
-				projectName: 'test',
-				requirements: []
+				...testProject,
+				projectName: 'test'
 			}
 		}
 

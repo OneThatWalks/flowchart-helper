@@ -1,6 +1,7 @@
 import React from 'react';
 import { ShallowWrapper, shallow, HTMLAttributes } from 'enzyme';
 import { RequirementsProps, Requirements } from './Requirements';
+import { testProject } from 'setupTests';
 
 describe('Requirements Component', () => {
 
@@ -16,7 +17,7 @@ describe('Requirements Component', () => {
 
 		props = {
 			project: {
-				projectName: '',
+				...testProject,
 				requirements: [
 					{
 						id: 1,
