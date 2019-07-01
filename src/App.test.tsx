@@ -1,18 +1,17 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import App from './App';
-import { shallow } from 'enzyme';
+import { shallow, ShallowWrapper } from 'enzyme';
 
 describe('App Component', () => {
 
-  let wrapper;
+  let wrapper: ShallowWrapper;
 
   beforeEach(() => {
     wrapper = shallow(<App />);
   });
 
   it('renders without crashing', () => {
-    
+    expect(wrapper).not.toBe(undefined);
   });
 
 });
