@@ -1,9 +1,9 @@
 {
-	// Place your flowchart-helper workspace snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and 
-	// description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope 
-	// is left empty or omitted, the snippet gets applied to all languages. The prefix is what is 
-	// used to trigger the snippet and the body will be expanded and inserted. Possible variables are: 
-	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. 
+	// Place your flowchart-helper workspace snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and
+	// description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope
+	// is left empty or omitted, the snippet gets applied to all languages. The prefix is what is
+	// used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders.
 	// Placeholders with the same ids are connected.
 	// Example:
 	// "Print to console": {
@@ -17,30 +17,26 @@
 	// }
 	"Create component with redux props": {
 		"scope": "typescriptreact",
-		"prefix": "createReactReduxComponent",
+		"prefix": "crrc",
 		"body": [
 			"import React from 'react';",
 			"import { connect } from 'react-redux';",
 			"",
-			"export interface ${1:ComponentName}Props {",
+			"export interface ${1:ComponentName}OwnProps {",
 			"}",
 			"",
-			"interface StateProps {",
+			"export interface $1StateProps {",
 			"}",
 			"",
-			"interface DispatchProps {",
+			"export interface $1DispatchProps {",
 			"}",
 			"",
-			"type Props = StateProps & DispatchProps & $1Props;",
+			"export type $1Props = $1StateProps & $1DispatchProps & $1OwnProps;",
 			"",
-			"interface State {",
+			"export interface $1State {",
 			"}",
 			"",
-			"class $1 extends React.Component<Props, State> {",
-			"",
-			"    constructor(props: Props) {",
-			"        super(props);",
-			"    }",
+			"export class $1 extends React.Component<$1Props, $1State> {",
 			"",
 			"    render() {",
 			"        return ($0);",
@@ -48,12 +44,44 @@
 			"",
 			"}",
 			"",
-			"function mapStateToProps(state: StateProps, ownProps: $1Props): StateProps & $1Props {",
+			"function mapStateToProps(state: $1StateProps, ownProps: $1OwnProps): $1StateProps & $1OwnProps {",
 			"    return {",
 			"    };",
 			"}",
 			"",
 			"export default connect(mapStateToProps, {})($1);"
+		],
+		"description": "Will create a react component with redux connector"
+	},
+	"Create test fixture for component": {
+		"scope": "typescriptreact",
+		"prefix": "compTest",
+		"body": [
+			"import React from 'react';",
+			"import { shallow, ShallowWrapper } from 'enzyme';",
+			"",
+			"describe('${1:ComponentName} Component', () => {",
+			"",
+			"\tlet wrapper: ShallowWrapper;",
+			"\tlet props: $1Props;",
+			"",
+			"\tbeforeEach(() => {",
+			"\t\tprops = {};",
+			"",
+			"\t\twrapper = shallow(<$1 {...props} />);",
+			"",
+			"\t});",
+			"",
+			"\tit('', () => {",
+			"\t\t// Arrange",
+			"",
+			"\t\t// Act",
+			"",
+			"\t\t// Assert",
+			"",
+			"\t});",
+			"",
+			"});"
 		],
 		"description": "Will create a react component with redux connector"
 	}
