@@ -35,7 +35,7 @@ export class Requirements extends React.Component<RequirementsProps, Requirement
     mapRequirementsToListElements = (item: Requirement, index: number): JSX.Element => {
         const { removeRequirement } = this;
         return (
-            <li key={index}>{item.name}
+            <li key={index} className="list-group-item">{item.name}
                 <button className="btn btn-link" onClick={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {removeRequirement(item);}}><FontAwesomeIcon icon={faTrash} /></button>
             </li>
         );
@@ -73,10 +73,10 @@ export class Requirements extends React.Component<RequirementsProps, Requirement
         return (
             <div className="container">
                 <h3>Requirements</h3>
-                <ul>
+                <ul className="list-group list-group-flush">
                     {requirements.map((item, index) => mapRequirementsToListElements(item, index))}
-                    <li>
-                        <input type="text" className="form-control form-control-sm" value={input} onKeyUp={addRequirement} onChange={inputOnChange} />
+                    <li className="list-group-item">
+                        <input type="text" className="form-control form-control-sm list-group-input" value={input} onKeyUp={addRequirement} onChange={inputOnChange} />
                     </li>
                 </ul>
             </div>

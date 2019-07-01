@@ -33,3 +33,7 @@ body {
     border-right-style: solid;
     border-right-color: var(--fc-light-gray);
 }
+
+li.list-group-item {
+	background-color: var(--fc-gray);
+}
