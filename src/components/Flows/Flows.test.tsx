@@ -86,7 +86,7 @@ describe('Flows Component', () => {
 		expect(historyFn.mock.calls[0][0]).toEqual('/flowEditor?id=1');
 	});
 
-	it('does not redirect when flow error in redering', () => {
+	it('does not redirect when flow error in rendering', () => {
 		// Arrange
 		const button = wrapper.find('button.list-group-item').first();
 
