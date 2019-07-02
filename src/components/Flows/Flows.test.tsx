@@ -89,6 +89,7 @@ describe('Flows Component', () => {
 	it('does not redirect when flow error in rendering', () => {
 		// Arrange
 		const button = wrapper.find('button.list-group-item').first();
+		window.alert = () => {};
 
 		// Act
 		button.simulate('click', {
