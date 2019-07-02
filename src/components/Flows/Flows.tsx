@@ -32,7 +32,7 @@ export class Flows extends React.Component<FlowsProps, FlowsState> {
 	onEditButtonClickHandler = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
 		const { redirectToFlowEditor } = this;
 		const flowId = event.currentTarget.getAttribute('data-flowId');
-		if (!flowId || parseInt(flowId, 10) === NaN) {
+		if (!flowId || Number.isNaN(parseInt(flowId, 10))) {
 			alert('There was an error redirecting to flow.  Please try again.');
 			return;
 		}
