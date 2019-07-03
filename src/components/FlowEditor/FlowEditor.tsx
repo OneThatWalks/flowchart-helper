@@ -1,5 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter, RouteComponentProps } from 'react-router';
+import { IdParam } from 'constants/types';
 
 export interface FlowEditorOwnProps {
 }
@@ -10,7 +12,7 @@ export interface FlowEditorStateProps {
 export interface FlowEditorDispatchProps {
 }
 
-export type FlowEditorProps = FlowEditorStateProps & FlowEditorDispatchProps & FlowEditorOwnProps;
+export type FlowEditorProps = RouteComponentProps<IdParam> & FlowEditorStateProps & FlowEditorDispatchProps & FlowEditorOwnProps;
 
 export interface FlowEditorState {
 }
@@ -18,7 +20,7 @@ export interface FlowEditorState {
 export class FlowEditor extends React.Component<FlowEditorProps, FlowEditorState> {
 
 	render() {
-		return (<div className="container"></div>);
+		return (<div className="container">{this.props.match.params.id}</div>);
 	}
 
 }
@@ -28,4 +30,4 @@ function mapStateToProps(state: FlowEditorStateProps, ownProps: FlowEditorOwnPro
 	};
 }
 
-export default connect(mapStateToProps, {})(FlowEditor);
+export default withRouter(connect(mapStateToProps, {})(FlowEditor));

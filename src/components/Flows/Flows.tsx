@@ -22,7 +22,7 @@ export interface FlowsState {
 export class Flows extends React.Component<FlowsProps, FlowsState> {
 
 	redirectToFlowEditor = (id: number) => {
-		this.props.history.push(`/flowEditor?id=${id}`);
+		this.props.history.push(`/flows/${id}/edit`);
 	}
 
 	onAddButtonClickHandler = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {

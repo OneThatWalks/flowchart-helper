@@ -7,4 +7,8 @@ export interface NavbarLink {
     value: string
 }
 
+export interface IdParam {
+	id: string;
+}
+
 // TODO: Use case persona map, who can use what

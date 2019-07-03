@@ -62,7 +62,7 @@ describe('Flows Component', () => {
 
 		// Assert
 		expect(historyFn.mock.calls.length).toEqual(1);
-		expect(historyFn.mock.calls[0][0]).toEqual('/flowEditor?id=0');
+		expect(historyFn.mock.calls[0][0]).toEqual('/flows/0/edit');
 	});
 
 	it('displays flows when flows exist in project', () => {
@@ -83,7 +83,7 @@ describe('Flows Component', () => {
 
 		// Assert
 		expect(historyFn.mock.calls.length).toEqual(1);
-		expect(historyFn.mock.calls[0][0]).toEqual('/flowEditor?id=1');
+		expect(historyFn.mock.calls[0][0]).toEqual('/flows/1/edit');
 	});
 
 	it('does not redirect when flow error in rendering', () => {
