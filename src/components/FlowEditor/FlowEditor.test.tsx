@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 import { FlowEditor, FlowEditorProps } from './FlowEditor';
+import { createBrowserHistory, createLocation } from 'history';
 
 describe('FlowEditor Component', () => {
 
@@ -8,7 +9,18 @@ describe('FlowEditor Component', () => {
 	let props: FlowEditorProps;
 
 	beforeEach(() => {
-		props = {};
+		props = {
+			history: createBrowserHistory(),
+			location: createLocation(''),
+			match: {
+				isExact: false,
+				params: {
+					id: '0'
+				},
+				path: '',
+				url: ''
+			}
+		};
 
 		wrapper = shallow(<FlowEditor {...props} />);
 
