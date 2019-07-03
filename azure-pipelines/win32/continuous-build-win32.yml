@@ -20,6 +20,8 @@ steps:
   timeoutInMinutes: 5
   displayName: Build
 
+- script: dir $(System.DefaultWorkingDirectory)
+
 - task: CopyFiles@2
   inputs:
     SourceFolder: '$(System.DefaultWorkingDirectory)'
