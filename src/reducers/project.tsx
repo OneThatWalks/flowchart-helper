@@ -3,7 +3,8 @@ import { ProjectActionTypes, SET_PROJECT_NAME, ProjectState, ADD_REQUIREMENT, RE
 const initialState: ProjectState = {
 	projectName: '',
 	requirements: [],
-	flows: []
+	flows: [],
+	services: []
 };
 
 function projectReducer(state: ProjectState = initialState, action: ProjectActionTypes): ProjectState {
